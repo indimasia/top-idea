@@ -4,6 +4,13 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import HomeScreen from './Screens/Home/HomeScreen'
 import { ThemeContext } from './context/ThemeContext'
+import { BrowserRouter, RouterProvider, createBrowserRouter } from 'react-router-dom'
+import AddNewScreen from './Screens/NewIde/AddNewScreen'
+
+const router = createBrowserRouter([
+  { path: '/', element: <HomeScreen /> },
+  { path: '/new', element: <AddNewScreen /> },
+])
 
 function App() {
   const [count, setCount] = useState(0)
@@ -15,7 +22,7 @@ function App() {
         data-theme={theme}
         >
         <div className="max-w-2xl w-full items-center">
-          <HomeScreen />
+          <RouterProvider router={router} />
         </div>
       </div>
     </ThemeContext.Provider>
