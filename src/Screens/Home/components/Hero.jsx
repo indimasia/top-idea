@@ -14,7 +14,7 @@ function Hero() {
             onChange={(event) => setTheme(event.target.value)}
             className="select select-bordered border-primary w-full max-w-xs"
             >
-            <option disabled selected>Select Theme</option>
+            <option disabled>Select Theme</option>
             <option>light</option>
             <option>dark</option>
             <option>cupcake</option>
