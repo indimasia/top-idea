@@ -1,10 +1,15 @@
-import { drizzle } from "drizzle-orm/mysql2";
-import process from "process";
-import mysql from "mysql2/promise";
-const connection = await mysql.createConnection({
-  host: 'localhost',
-  port: 33061,
-  username: 'root',
-  database: 'top_ideas',
+import { openDB } from 'idb';
+
+const DB_NAME = 'todo_ideas';
+const DB_VERSION = 1;
+const STORE_NAME = 'items';
+
+const dbPromise = openDB(DB_NAME, DB_VERSION, {
+  upgrade(db) {
+    if (!db.objectStoreNames.contains(STORE_NAME)) {
+      db.createObjectStore(STORE_NAME, { keyPath: 'id', autoIncrement: true });
+    }
+  }
 });
-const db = drizzle(connection);
+
+export const getDb = () => dbPromise;
